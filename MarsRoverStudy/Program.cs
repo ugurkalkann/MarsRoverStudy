@@ -51,12 +51,6 @@ namespace MarsRoverCaseStudy
             }
         }
 
-        public static bool ValidateInput(string inputString)
-        {
-            //TODO
-            return true;
-        }
-
         public static bool CheckCoordinates(Rover rover, Coordinate plateauMaxCoordinate, IEnumerable<Coordinate> roverFinalCoordinates)
         {
             if (rover.CurrentCoordinate.CoordinateX > plateauMaxCoordinate.CoordinateX ||
