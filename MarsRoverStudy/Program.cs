@@ -26,7 +26,7 @@ namespace MarsRoverCaseStudy
 
         public static void ExplorePlateau(Coordinate plateauMaxCoordinate, List<Rover> roverList)
         {
-            var roverFinalCoordinates = new List<Coordinate>();
+            var roverFinalCoordinates = new List<Coordinate>(); //Coordinates of the other rovers which finished their job.
 
             foreach (var currentRover in roverList)
             {
@@ -90,13 +90,13 @@ namespace MarsRoverCaseStudy
             else
             {
                 string inputStr =
-@"5 5
-1 2 N
-LMLMLMLMM
-3 3 E
-MMRMMRMRRM
-1 2 E
-LMLMLMLMMRM";
+                        @"5 5
+                        1 2 N
+                        LMLMLMLMM
+                        3 3 E
+                        MMRMMRMRRM
+                        1 2 E
+                        LMLMLMLMMRM";
                 input = ReadInputFromString(inputStr);
             }
 
@@ -108,16 +108,16 @@ LMLMLMLMMRM";
             MarsMissionInput input = new MarsMissionInput();
 
             List<string> inputList = inputStr.Split(Environment.NewLine).ToList();
-            var plateauMaxCoordinates = inputList[0].Split(' ');
+            var plateauMaxCoordinates = inputList[0].Trim().Split(' ');
             input.PlateauMaxCoordinate = new Coordinate(long.Parse(plateauMaxCoordinates[0]), long.Parse(plateauMaxCoordinates[1]));
 
             for (var i = 1; i < inputList.Count; i++)
             {
-                string inputLine = inputList[i];
+                string inputLine = inputList[i].Trim();
                 var roverInitialPosition = inputLine.Split(' ');
                 i++;
-                string roverInstructions = inputList[i];
-                input.RoverList.Add(new Rover(new Coordinate(long.Parse(roverInitialPosition[0]), long.Parse(roverInitialPosition[1])), (Direction)char.Parse(roverInitialPosition[2]), roverInstructions.Trim()));
+                string roverInstructions = inputList[i].Trim();
+                input.RoverList.Add(new Rover(new Coordinate(long.Parse(roverInitialPosition[0]), long.Parse(roverInitialPosition[1])), (Direction)char.Parse(roverInitialPosition[2]), roverInstructions));
             }
 
             return input;
@@ -136,13 +136,13 @@ LMLMLMLMMRM";
             Console.WriteLine($"Reading input from {inputFileName}");
             using (StreamReader reader = File.OpenText($"{inputFileName}"))
             {
-                var plateauMaxCoordinates = reader.ReadLine().Split(' ');
+                var plateauMaxCoordinates = reader.ReadLine().Trim().Split(' ');
                 input.PlateauMaxCoordinate = new Coordinate(long.Parse(plateauMaxCoordinates[0]), long.Parse(plateauMaxCoordinates[1]));
 
                 //read rover info
                 while (!reader.EndOfStream)
                 {
-                    var roverInitialPosition = reader.ReadLine().Split(' ');
+                    var roverInitialPosition = reader.ReadLine().Trim().Split(' ');
                     input.RoverList.Add(new Rover(new Coordinate(long.Parse(roverInitialPosition[0]), long.Parse(roverInitialPosition[1])), (Direction)char.Parse(roverInitialPosition[2]), reader.ReadLine().Trim()));
 
                 }
